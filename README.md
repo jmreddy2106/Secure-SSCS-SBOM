@@ -2,6 +2,13 @@
 
 ### _Ensuring Trust and Transparency in Software Supply Chains_
 
+---
+
+## Documentation
+
+For detailed instructions, please visit the complete [**Documentation**](https://jmreddy2106.github.io/Secure-SSCS-SBOM/).
+
+---
 ### Background
 
 - #### Software Bill of Materials (SBOM)
@@ -110,3 +117,62 @@ In an era where software dependencies grow increasingly complex, understanding "
 - [ ] AI-driven risk prioritization and remediation.
 - [ ] Community-contributed plugins and extensions.
 - [ ] AI/ML integration to classify security levels
+
+
+
+## **Installation**
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/secure-sscs-sbom.git
+   cd secure-sscs-sbom
+
+2. Download install the PostGreSQL database in your local machine
+
+## Scan and Fetch SBOM from GitHub API
+
+- Navigate to python folder and run the following command to fetch SBOM from GitHub API
+
+3. The `fetch_github_sbom.py` script fetches the SBOM from `GitHub API`. To run it, first you need a [GitHub API token](https://docs.github.com/en/organizations/managing-programmatic-access-to-your-organization/setting-a-personal-access-token-policy-for-your-organization) or `Personal Access Token (PAT)`. You can get it from your GitHub account settings. Then, you can run the script. 
+
+:warning: **GitHub API Rate Limit:** Total number of requests is limited to **`5000`** per hour. To know more about GitHub API rate limits, please visit [GitHub API rate limits](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28)
+
+## How to Create and Use a GitHub Personal Access Token (PAT)
+
+1. Log in to your GitHub account and go to [Developer Settings](https://github.com/settings/tokens).
+2. Click on **"Personal Access Tokens"** > **"Tokens (classic)"**.
+3. Click the **"Generate new token"** button and choose **"Generate new token (classic)"**.
+4. Add a description to your token (e.g., "My Personal Token").
+5. Set the **expiration date** for your token (e.g., 30 days, 90 days, or no expiration).
+6. Select the **scopes (permissions)** you need:
+    - For repository access: Choose `repo` (full control of private repositories).
+    - For working with Gists: Select `gist`.
+    - Adjust scopes based on your requirements.
+7. Click **"Generate token"**.
+8. Copy the token displayed **immediately**. Once you navigate away, you won’t be able to see it again.
+
+:warning: **Important:** Treat your PAT like a password. Do not share it or expose it in code or logs.
+
+4. Create a `.env` file with your database credentials and other required configurations. You can use the following as a template.
+
+    ```bash
+    GITHUB_TOKEN=<your-github-token>      
+    DB_CONNECTION=postgresql://<database_user>:<password>@<host/ip>:<port_number>/<Database_name>
+    GITHUB_OWNER=<Git user>
+5. Database setup: You can use the following SQL commands to create the required tables in your PostgreSQL database
+    ```bash
+    CREATE TABLE sbom_data (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(500) NOT NULL,
+        sbom JSONB NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    )
+6. Create a python virtual environment, activate virtual environment and install the required packages using pip. You can use the following command:
+
+    ```bash
+        python -m venv myvenv
+        source myvenv/bin/activate (Linux/Ubuntu)
+        myvenv\Scripts\activate (Windows)
+        pip install -r requirements.txt
+7. Run the `fetch_github_sbom.py` script to fetch the SBOM from GitHub API. The script will create a new database table if not exists and inserts the fetched SBOM data.
+
+
