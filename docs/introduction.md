@@ -7,3 +7,6 @@ This Python script automates the process of fetching Software Bill of Materials 
 - Store SBOM data in a PostgreSQL database for analysis.
 - Handles GitHub API rate limits with retries.
 - Uses asynchronous programming for efficient GitHub API interaction.
+
+---
+[Previous: Home](index.md) | [Next: Installations](installation.md)
