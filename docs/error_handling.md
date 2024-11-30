@@ -14,3 +14,5 @@ The script handles various error scenarios:
 - **Cause**: Issues with PostgreSQL connection or table.
 - **Solution**: Logs the error message. Ensure the `DB_CONNECTION` is valid.
 
+---
+[Previous: Database Schema](database_schema.md) | [Next: Contributing](contributing.md)
