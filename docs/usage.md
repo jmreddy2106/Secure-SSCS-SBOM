@@ -2,7 +2,7 @@
 
 1. Ensure your `.env` file is configured correctly.
 2. Run the script:
-    - `python python/sbom_fetcher.py`
+   - `python python/sbom_fetcher.py`
 
 ## Script Workflow
 
@@ -14,9 +14,10 @@
 ## Expected Output
 
 - Logs indicating progress, such as:
-    - "Scanning completed for page X"
-    - "SBOM stored in the database with ID: X"
+  - "Scanning completed for page X"
+  - "SBOM stored in the database with ID: X"
 - Remaining rate limit at the end of the script.
 
 ---
-[Previous: Configuration](configuration.md) | [Next: APIs](apis.md)
+
+[Previous: Configuration](configuration.md) | [Next: APIs](api.md)
