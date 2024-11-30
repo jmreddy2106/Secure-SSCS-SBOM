@@ -3,6 +3,7 @@
 The script uses a PostgreSQL database to store SBOM data.
 
 ## Table: `sbom_data`
+
 | Column Name  | Data Type        | Description                     |
 |--------------|------------------|---------------------------------|
 | `id`         | SERIAL           | Primary key                    |
@@ -13,12 +14,11 @@ The script uses a PostgreSQL database to store SBOM data.
 
 ### SQL Query to Create Table
 
-```CREATE TABLE sbom_data (
-    id SERIAL PRIMARY KEY,
-    reponame VARCHAR(500) NOT NULL,
-    sbom JSONB NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+`CREATE TABLE sbom_data (`
+    `id SERIAL PRIMARY KEY,`
+    `reponame VARCHAR(500) NOT NULL,`
+    `sbom JSONB NOT NULL,`
+    `created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);`
 
 
 ---
