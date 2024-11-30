@@ -89,6 +89,7 @@ In an era where software dependencies grow increasingly complex, understanding "
 
 - [x] Generate SBOM from a project
 - [x] Getting SBOM from GitHub
+- [ ] Build a Directed Acyclic Graph (DAG) from the SBOM
 - [ ] Vulnerability Scanning
 - [ ] Integration with CI/CD
 - [ ] Compliance Reporting
@@ -118,13 +119,15 @@ In an era where software dependencies grow increasingly complex, understanding "
 - [ ] Community-contributed plugins and extensions.
 - [ ] AI/ML integration to classify security levels
 
+# Fetching SBOM from GitHub repo
 
+### Init from Python module
 
 ## **Installation**
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/secure-sscs-sbom.git
-   cd secure-sscs-sbom
+   cd secure-sscs-sbom/python
 
 2. Download install the PostGreSQL database in your local machine
 
@@ -175,4 +178,6 @@ In an era where software dependencies grow increasingly complex, understanding "
         pip install -r requirements.txt
 7. Run the `fetch_github_sbom.py` script to fetch the SBOM from GitHub API. The script will create a new database table if not exists and inserts the fetched SBOM data.
 
+
+# Build a Directed Acyclic Graph (DAG)
 
