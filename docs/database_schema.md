@@ -19,6 +19,7 @@ The script uses a PostgreSQL database to store SBOM data.
     sbom JSONB NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-```
+
+
 ---
 [Previous: APIs](apis.md) | [Next: Error Handling](error_handling.md)
