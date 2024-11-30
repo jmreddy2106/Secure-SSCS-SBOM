@@ -4,14 +4,15 @@ The script uses environment variables to configure settings like the GitHub owne
 
 ## `.env` File Setup
 Create a `.env` file in the root directory of your project with the following variables:
-    ```env
-    GITHUB_OWNER=your_github_username
-    GITHUB_TOKEN=your_github_personal_access_token
-    DB_CONNECTION=postgres://username:password@localhost:5432/mydatabase
+   - `GITHUB_OWNER=your_github_username`
+   - `GITHUB_TOKEN=your_github_personal_access_token`
+   - `DB_CONNECTION=postgres://username:password@localhost:5432/mydatabase`
 
 # Explanation of Variables
 
-`GITHUB_OWNER:` GitHub username or organization name.
-`GITHUB_TOKEN:` Personal access token for authentication with GitHub.
-`DB_CONNECTION:` PostgreSQL connection string, including credentials.
+- `GITHUB_OWNER:` GitHub username or organization name.
+- `GITHUB_TOKEN:` Personal access token for authentication with GitHub.
+- `DB_CONNECTION:` PostgreSQL connection string, including credentials.
 
+---
+[Previous: Installation](installation.md) | [Next: Usage](usage.md)

@@ -12,11 +12,13 @@ The script uses a PostgreSQL database to store SBOM data.
 
 
 ### SQL Query to Create Table
-```sql
-CREATE TABLE sbom_data (
+
+```CREATE TABLE sbom_data (
     id SERIAL PRIMARY KEY,
     reponame VARCHAR(500) NOT NULL,
     sbom JSONB NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
+```
+---
+[Previous: APIs](apis.md) | [Next: Error Handling](error_handling.md)
