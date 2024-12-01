@@ -165,7 +165,8 @@ In an era where software dependencies grow increasingly complex, understanding "
     ```bash
     CREATE TABLE sbom_data (
         id SERIAL PRIMARY KEY,
-        name VARCHAR(500) NOT NULL,
+        repo_owner VARCHAR(500) NOT NULL,
+        reponame VARCHAR(500) NOT NULL,
         sbom JSONB NOT NULL,
         created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     )
