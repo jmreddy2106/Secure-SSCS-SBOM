@@ -62,6 +62,7 @@ def verify_or_create_database_and_table():
                     cursor.execute("""
                         CREATE TABLE sbom_data (
                             id SERIAL PRIMARY KEY,
+                            repo_owner varchar(500) NOT NULL,
                             reponame varchar(500) NOT NULL,
                             sbom JSONB NOT NULL,
                             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -145,15 +146,15 @@ async def list_repositories():
     return all_repos
 
 
-def save_sbom_to_database(repo_name, sbom):
+def save_sbom_to_database(github_owner, repo_name, sbom):
     """Save SBOM data to PostgreSQL database.
         if your not allowing duplicate repos use the below line after VALUES
 
     	ON CONFLICT (reponame) DO NOTHING
     """
     query = """
-        INSERT INTO sbom_data (reponame, sbom)
-        VALUES (%s, %s)
+        INSERT INTO sbom_data (repo_owner, reponame, sbom)
+        VALUES (%s, %s, %s)
         RETURNING id;
     """
     try:
@@ -163,7 +164,7 @@ def save_sbom_to_database(repo_name, sbom):
                 sbom_json = json.dumps(sbom)
 
                 # Execute the query with the JSON string
-                cursor.execute(query, (repo_name, sbom_json))
+                cursor.execute(query, (github_owner, repo_name, sbom_json))
                 sbom_id = cursor.fetchone()
                 if sbom_id:
                     print(f"SBOM stored in the database with ID: {sbom_id[0]}")
@@ -178,7 +179,7 @@ def fetch_sbom(repo_name):
         response = requests.get(url, headers=HEADERS)
         response.raise_for_status()
         sbom_data = response.json()
-        save_sbom_to_database(repo_name, sbom_data)
+        save_sbom_to_database(GITHUB_OWNER, repo_name, sbom_data)
     except requests.exceptions.RequestException as error:
         print(f"SBOM Graph not available for {repo_name}")
 
