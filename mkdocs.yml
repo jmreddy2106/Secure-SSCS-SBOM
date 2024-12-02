@@ -1,0 +1,36 @@
+site_name: Secure Software Supply Chain Security using SBOM
+theme:
+  name: readthedocs  # You can also use "readthedocs"
+  highlightjs: true
+
+repo_name: "jmreddy2106/Secure-SSCS-SBOM"
+repo_url: "https://github.com/jmreddy2106/Secure-SSCS-SBOM"
+edit_uri: "blob/main/docs/"
+
+nav:
+  - Home: index.md 
+  - Introduction: introduction.md 
+  - Installation: installation.md
+  - Configuration: configuration.md
+  - Usage: usage.md
+  - APIs: api.md
+  - Database Schema: database_schema.md
+  - Error Handling: error_handling.md
+  - Contributing: contributing.md
+  - License: license.md
+
+plugins:
+  - search:
+     lang: en
+  - open-in-new-tab
+  - macros
+
+# Additional settings (optional)
+markdown_extensions:
+  - toc
+  - tables
+  - codehilite:
+        guess_lang: false  # Prevent guessing incorrect languages
+  - pymdownx.superfences
+
+
