@@ -26,4 +26,4 @@ The script interacts with the following GitHub API endpoints:
 
 
 ---
-[Previous: APIs](apis.md) | [Next: Database](database_schema.md)
+[Previous: APIs](usage.md) | [Next: Database](database_schema.md)

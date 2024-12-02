@@ -1,4 +1,4 @@
-# Project Documentation
+# Secure Software Supply Chain Security using SBOM
 
 Welcome to the documentation for **GitHub SBOM Fetcher**.
 
@@ -9,7 +9,7 @@ This project automates the process of fetching Software Bill of Materials (SBOM)
 2. [Installation](installation.md)
 3. [Configuration](configuration.md)
 4. [Usage](usage.md)
-5. [APIs](apis.md)
+5. [APIs](api.md)
 6. [Database Schema](database_schema.md)
 7. [Error Handling](error_handling.md)
 8. [Contributing](contributing.md)

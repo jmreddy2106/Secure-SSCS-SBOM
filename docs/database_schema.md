@@ -15,13 +15,14 @@ The script uses a PostgreSQL database to store SBOM data.
 
 ### SQL Query to Create Table
 
-`CREATE TABLE sbom_data (`
-    `id SERIAL PRIMARY KEY`,
-    `repo_owner VARCHAR(500) NOT NULL`,
-    `reponame VARCHAR(500) NOT NULL,`
-    `sbom JSONB NOT NULL,`
-    `created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);`
-
+```sql
+CREATE TABLE sbom_data (
+    id SERIAL PRIMARY KEY,
+    repo_owner VARCHAR(500) NOT NULL,
+    reponame VARCHAR(500) NOT NULL,
+    sbom JSONB NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+```
 
 ---
-[Previous: APIs](apis.md) | [Next: Error Handling](error_handling.md)
+<!-- [Previous: APIs](api.md) | [Next: Error Handling](error_handling.md) -->

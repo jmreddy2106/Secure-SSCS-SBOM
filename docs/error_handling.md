@@ -15,4 +15,4 @@ The script handles various error scenarios:
 - **Solution**: Logs the error message. Ensure the `DB_CONNECTION` is valid.
 
 ---
-[Previous: Database Schema](database_schema.md) | [Next: Contributing](contributing.md)
+<!-- [Previous: Database Schema](database_schema.md) | [Next: Contributing](contributing.md) -->
