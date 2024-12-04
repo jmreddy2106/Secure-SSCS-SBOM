@@ -24,5 +24,39 @@ CREATE TABLE sbom_data (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 ```
 
+### Table: `Vulnerabilities`
+
+The `vulnerabilities` table stores information about vulnerabilities detected in specific repositories and their associated packages. Each column in the table is described below:
+
+| Column Name         | Data Type          | Constraints         | Description                                                                 |
+|---------------------|--------------------|---------------------|-----------------------------------------------------------------------------|
+| `id`                | `SERIAL`          | `PRIMARY KEY`       | A unique identifier for each record in the table. Automatically generated. |
+| `repo_name`         | `VARCHAR(255)`    | `NOT NULL`          | The name of the repository where the vulnerability was detected.           |
+| `package`           | `VARCHAR(255)`    | `NOT NULL`          | The name of the package in which the vulnerability exists.                 |
+| `version`           | `VARCHAR(50)`     | `NOT NULL`          | The version of the package where the vulnerability was identified.         |
+| `ecosystem`         | `VARCHAR(50)`     | `NOT NULL`          | The ecosystem or package manager (e.g., npm, PyPI, Maven) of the package.  |
+| `vulnerability_id`  | `VARCHAR(100)`    | `NOT NULL`          | A unique identifier for the vulnerability (e.g., CVE ID).                  |
+| `severity_type`     | `VARCHAR(50)`     | `NOT NULL`          | The type of severity (e.g., CVSS).                                         |
+| `severity_score`    | `FLOAT`           | `NOT NULL`          | The numerical severity score (e.g., CVSS score).                           |
+| `severity_level`    | `VARCHAR(20)`     | `NOT NULL`          | The categorized severity level (e.g., Low, Medium, High).                  |
+| `summary`           | `TEXT`            |                     | A textual summary describing the vulnerability.                            |
+| **Unique Constraint** |                  | `UNIQUE(repo_name, package, version, vulnerability_id)` | Ensures that no duplicate entries exist for the same package vulnerability within a repository. |
+
+```sql
+    CREATE TABLE vulnerabilities (
+        id SERIAL PRIMARY KEY,
+        repo_name VARCHAR(255) NOT NULL,
+        package VARCHAR(255) NOT NULL,
+        version VARCHAR(50) NOT NULL,
+        ecosystem VARCHAR(50) NOT NULL,
+        vulnerability_id VARCHAR(100) NOT NULL,
+        severity_type VARCHAR(50) NOT NULL,
+        severity_score FLOAT NOT NULL,
+        severity_level VARCHAR(20) NOT NULL,
+        summary TEXT,
+        UNIQUE (repo_name, package, version, vulnerability_id)
+    );
+```
+
 ---
 <!-- [Previous: APIs](api.md) | [Next: Error Handling](error_handling.md) -->

@@ -10,6 +10,7 @@ import requests
 from pathlib import Path
 import json 
 from tabulate import tabulate
+from db_utils import verify_or_create_database_and_tables
 
 
 """
@@ -41,38 +42,72 @@ HEADERS = {
 REQUIRED_FILES = {"package.json", "requirements.txt"}
 
 
-def verify_or_create_database_and_table():
-    """Verify if the database and table exist, create them if not."""
-    try:
-        with psycopg2.connect(DB_CONNECTION) as conn:
-            conn.autocommit = True  # Allow creation of the database
-            with conn.cursor() as cursor:
-                # Check if the `sbom_data` table exists
-                cursor.execute("""
-                    SELECT EXISTS (
-                        SELECT FROM information_schema.tables 
-                        WHERE table_name = 'sbom_data'
-                    );
-                """)
-                table_exists = cursor.fetchone()[0]
+# def verify_or_create_database_and_tables():
+#     """Verify and create necessary database tables."""
+#     try:
+#         with psycopg2.connect(DB_CONNECTION) as conn:
+#             conn.autocommit = True  # Allow creation of the database
+#             with conn.cursor() as cursor:
+#                 # Check if the `sbom_data` table exists
+#                 cursor.execute("""
+#                     SELECT EXISTS (
+#                         SELECT FROM information_schema.tables 
+#                         WHERE table_name = 'sbom_data'
+#                     );
+#                 """)
+#                 sbom_table_exists = cursor.fetchone()[0]
 
-                # Create the `sbom_data` table if it doesn't exist
-                if not table_exists:
-                    print("Table 'sbom_data' does not exist. Creating it now...")
-                    cursor.execute("""
-                        CREATE TABLE sbom_data (
-                            id SERIAL PRIMARY KEY,
-                            repo_owner varchar(500) NOT NULL,
-                            reponame varchar(500) NOT NULL,
-                            sbom JSONB NOT NULL,
-                            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                        );
-                    """)
-                    print("Table 'sbom_data' created successfully.")
-                else:
-                    print("Table 'sbom_data' already exists.")
-    except psycopg2.Error as db_error:
-        print(f"Database error during verification or creation: {db_error}")
+#                 # Create the `sbom_data` table if it doesn't exist
+#                 if not sbom_table_exists:
+#                     print("Table 'sbom_data' does not exist. Creating it now...")
+#                     cursor.execute("""
+#                         CREATE TABLE sbom_data (
+#                             id SERIAL PRIMARY KEY,
+#                             repo_owner VARCHAR(500) NOT NULL,
+#                             reponame VARCHAR(500) NOT NULL,
+#                             sbom JSONB NOT NULL,
+#                             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+#                         );
+#                     """)
+#                     print("Table 'sbom_data' created successfully.")
+#                 else:
+#                     print("Table 'sbom_data' already exists.")
+
+#                 # Check if the `vulnerabilities` table exists
+#                 cursor.execute("""
+#                     SELECT EXISTS (
+#                         SELECT FROM information_schema.tables 
+#                         WHERE table_name = 'vulnerabilities'
+#                     );
+#                 """)
+#                 vulnerabilities_table_exists = cursor.fetchone()[0]
+
+#                 # Create the `vulnerabilities` table if it doesn't exist
+#                 if not vulnerabilities_table_exists:
+#                     print("Table 'vulnerabilities' does not exist. Creating it now...")
+#                     cursor.execute("""
+#                         CREATE TABLE vulnerabilities (
+#                             id SERIAL PRIMARY KEY,
+#                             repo_name VARCHAR(255) NOT NULL,
+#                             package VARCHAR(255) NOT NULL,
+#                             version VARCHAR(50) NOT NULL,
+#                             ecosystem VARCHAR(50) NOT NULL,
+#                             vulnerability_id VARCHAR(100) NOT NULL,
+#                             severity_type VARCHAR(50) NOT NULL,
+#                             severity_score FLOAT NOT NULL,
+#                             severity_level VARCHAR(20) NOT NULL,
+#                             summary TEXT,
+#                             UNIQUE (repo_name, package, version, vulnerability_id)
+#                         );
+#                     """)
+#                     print("Table 'vulnerabilities' created successfully.")
+#                 else:
+#                     print("Table 'vulnerabilities' already exists.")
+
+#     except psycopg2.Error as db_error:
+#         print(f"Database error during verification or creation: {db_error}")
+#         exit(1)  # Exit the script if there's a database error
+
 
 async def fetch_with_retry(session, url):
     """Fetch URL with retries on rate limits."""
@@ -216,7 +251,7 @@ if __name__ == "__main__":
 
     try:
         print("\nVerifying database and table...")
-        verify_or_create_database_and_table()
+        verify_or_create_database_and_tables()
 
         print("\nScanning anf Fetching repositories...")
         repos = asyncio.run(list_repositories())
