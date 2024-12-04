@@ -70,6 +70,8 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#sql-query-to-create-table">SQL Query to Create Table</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#table-vulnerabilities">Table: Vulnerabilities</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -157,6 +159,100 @@
 <span class="w">    </span><span class="n">reponame</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
 <span class="w">    </span><span class="n">sbom</span><span class="w"> </span><span class="n">JSONB</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
 <span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="table-vulnerabilities">Table: <code>Vulnerabilities</code></h3>
+<p>The <code>vulnerabilities</code> table stores information about vulnerabilities detected in specific repositories and their associated packages. Each column in the table is described below:</p>
+<table>
+<thead>
+<tr>
+<th>Column Name</th>
+<th>Data Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td><code>SERIAL</code></td>
+<td><code>PRIMARY KEY</code></td>
+<td>A unique identifier for each record in the table. Automatically generated.</td>
+</tr>
+<tr>
+<td><code>repo_name</code></td>
+<td><code>VARCHAR(255)</code></td>
+<td><code>NOT NULL</code></td>
+<td>The name of the repository where the vulnerability was detected.</td>
+</tr>
+<tr>
+<td><code>package</code></td>
+<td><code>VARCHAR(255)</code></td>
+<td><code>NOT NULL</code></td>
+<td>The name of the package in which the vulnerability exists.</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td><code>VARCHAR(50)</code></td>
+<td><code>NOT NULL</code></td>
+<td>The version of the package where the vulnerability was identified.</td>
+</tr>
+<tr>
+<td><code>ecosystem</code></td>
+<td><code>VARCHAR(50)</code></td>
+<td><code>NOT NULL</code></td>
+<td>The ecosystem or package manager (e.g., npm, PyPI, Maven) of the package.</td>
+</tr>
+<tr>
+<td><code>vulnerability_id</code></td>
+<td><code>VARCHAR(100)</code></td>
+<td><code>NOT NULL</code></td>
+<td>A unique identifier for the vulnerability (e.g., CVE ID).</td>
+</tr>
+<tr>
+<td><code>severity_type</code></td>
+<td><code>VARCHAR(50)</code></td>
+<td><code>NOT NULL</code></td>
+<td>The type of severity (e.g., CVSS).</td>
+</tr>
+<tr>
+<td><code>severity_score</code></td>
+<td><code>FLOAT</code></td>
+<td><code>NOT NULL</code></td>
+<td>The numerical severity score (e.g., CVSS score).</td>
+</tr>
+<tr>
+<td><code>severity_level</code></td>
+<td><code>VARCHAR(20)</code></td>
+<td><code>NOT NULL</code></td>
+<td>The categorized severity level (e.g., Low, Medium, High).</td>
+</tr>
+<tr>
+<td><code>summary</code></td>
+<td><code>TEXT</code></td>
+<td></td>
+<td>A textual summary describing the vulnerability.</td>
+</tr>
+<tr>
+<td><strong>Unique Constraint</strong></td>
+<td></td>
+<td><code>UNIQUE(repo_name, package, version, vulnerability_id)</code></td>
+<td>Ensures that no duplicate entries exist for the same package vulnerability within a repository.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">vulnerabilities</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">        </span><span class="n">repo_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">        </span><span class="n">package</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">        </span><span class="k">version</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">        </span><span class="n">ecosystem</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">        </span><span class="n">vulnerability_id</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">        </span><span class="n">severity_type</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">        </span><span class="n">severity_score</span><span class="w"> </span><span class="nb">FLOAT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">        </span><span class="n">severity_level</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">        </span><span class="n">summary</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">        </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">repo_name</span><span class="p">,</span><span class="w"> </span><span class="n">package</span><span class="p">,</span><span class="w"> </span><span class="k">version</span><span class="p">,</span><span class="w"> </span><span class="n">vulnerability_id</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
 </code></pre></div>
 <hr />
 <!-- [Previous: APIs](api.md) | [Next: Error Handling](error_handling.md) -->
