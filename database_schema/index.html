@@ -72,6 +72,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#table-vulnerabilities">Table: Vulnerabilities</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sql-query-to-create-table_1">SQL Query to Create Table</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -153,6 +155,7 @@
 </tbody>
 </table>
 <h3 id="sql-query-to-create-table">SQL Query to Create Table</h3>
+<hr />
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">sbom_data</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
 <span class="w">    </span><span class="n">repo_owner</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
@@ -240,6 +243,8 @@
 </tr>
 </tbody>
 </table>
+<h3 id="sql-query-to-create-table_1">SQL Query to Create Table</h3>
+<hr />
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">vulnerabilities</span><span class="w"> </span><span class="p">(</span>
 <span class="w">        </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
 <span class="w">        </span><span class="n">repo_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
